@@ -1,0 +1,44 @@
+version: "3.8"
+services:
+    filter:
+        image: filter:jsfilter
+        container_name: "filter-js"
+        build: ./filter
+        volumes:
+            - "./data/100/:/data/"
+        cpus: "1"
+    awk:
+        image: filter:awk
+        container_name: "filter-awk"
+        build: ./awk
+        volumes:
+            - "./data/100/:/data/"
+        cpus: "1"
+    mysql:
+        image: filter:mysql
+        container_name: "filter-mysql"
+        build: ./mysql
+        cpus: "1"
+    # ## Measurement's only!
+    awk-linux:
+        image: filter:awk-linux
+        container_name: "filter-awk-linux"
+        build: ./awk-linux
+        volumes:
+            - "./data/50/:/data/"
+        cpus: "1"
+    mysql-c:
+        image: filter:mysql-columns
+        container_name: "filter-mysql-columns"
+        build: ./mysql-c
+        cpus: "1"
+        # cpus: "4"
+        # volumes:
+        #     - "./data/:/data/"
+    awk-npm:
+        image: filter:awk-npm
+        container_name: "filter-awk-npm"
+        build: ./awk-npm
+        volumes:
+            - "./data/100/:/data/"
+        cpus: "1"
